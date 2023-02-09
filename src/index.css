@@ -25,3 +25,8 @@ body {
 .action-icons:hover {
   cursor: pointer;
 }
+
+.cart {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+}

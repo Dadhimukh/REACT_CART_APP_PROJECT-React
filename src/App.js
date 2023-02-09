@@ -1,17 +1,17 @@
 
-// import './App.css';
+import './App.css';
 import Cart from "./Cart";
 
 function App() {
   return (
     <>
-    <h1>Cart_App</h1>
+    <h1 className="heading">Cart_App</h1>
+    <Cart />
+    {/* <Cart />
     <Cart />
     <Cart />
     <Cart />
-    <Cart />
-    <Cart />
-    <Cart />
+    <Cart /> */}
     </>
   );
 }

@@ -27,6 +27,8 @@ body {
 }
 
 .cart {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
+  /* display: grid;
+  grid-template-columns: repeat(2, auto); */
+  display: flex;
+  flex-direction: column;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-      
+
       // // increasingQuantity Function
       // increaseQuantity = () => {
       //       // this.state.qty += 1;
@@ -35,7 +35,7 @@ class CartItem extends React.Component {
 
       render() {
             const { price, title, qty } = this.props.product;
-            const {product, onIncreaseQuantity, onDecreaseQuantity} = this.props;
+            const { product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = this.props;
             return (
                   <div className='cart-item'>
                         <div className='left-block'>
@@ -51,20 +51,21 @@ class CartItem extends React.Component {
                                           alt="increase"
                                           className='action-icons'
                                           src='https://cdn-icons-png.flaticon.com/128/1828/1828919.png'
-                                          onClick={ () => onIncreaseQuantity(product)}
+                                          onClick={() => onIncreaseQuantity(product)}
                                     />
 
                                     <img
                                           alt="decrease"
                                           className='action-icons'
                                           src='https://cdn-icons-png.flaticon.com/128/1828/1828899.png'
-                                          onClick={ () => onDecreaseQuantity(product)}
+                                          onClick={() => onDecreaseQuantity(product)}
                                     />
 
                                     <img
                                           alt="delete"
                                           className='action-icons'
                                           src='https://cdn-icons-png.flaticon.com/128/9068/9068885.png'
+                                          onClick={() => onDeleteProduct(product.id)}
                                     />
                               </div>
                         </div>

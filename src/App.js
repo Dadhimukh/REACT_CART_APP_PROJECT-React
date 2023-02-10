@@ -1,11 +1,12 @@
 
-import './App.css';
+// import './App.css';
 import Cart from "./Cart";
+import Navbar from './NavBar';
 
 function App() {
   return (
     <>
-    <h1 className="heading">Cart_App</h1>
+    <Navbar />
     <Cart />
     {/* <Cart />
     <Cart />

@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 // import './App.css';
 import Cart from "./Cart";
 import Navbar from './NavBar';

@@ -90,11 +90,30 @@ class App extends React.Component {
     return cartTotal;
   };
 
+  // Adding Product in FireBase
+  addProduct = () => {
+    firestore
+      .collection("porducts")
+      .add({
+        img: "",
+        price: 99,
+        qty: 4,
+        title: "TV",
+      })
+      .then((docRef) => {
+        console.log("product has been added ", docRef);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  };
+
   render() {
     const { products } = this.state;
     return (
       <div className="App">
         <Navbar count={this.getCartCount()} />
+        <button onClick={this.addProduct}>Add Product</button>
         <Cart
           products={products}
           onIncreaseQuantity={this.handleIncreaseQuantity}

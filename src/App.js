@@ -1,9 +1,14 @@
 import React from "react";
 import { firestore } from "./firebase";
-
-// import './App.css';
 import Cart from "./Cart";
 import Navbar from "./NavBar";
+
+
+const db = firestore;
+
+
+// import './App.css';
+
 
 class App extends React.Component {
   constructor() {
@@ -16,9 +21,9 @@ class App extends React.Component {
 
   componentDidMount() {
     //fetching all the products from the cloud firestore
-    firestore
+    db
       //query for fecthing the product which we want as per our query
-      .collection("porducts") //getting all the products
+      .collection("products") //getting all the products
       // .where('price','>=', 999) // after fetching db we should write query
       .onSnapshot((snapshot) => {
         const products = snapshot.docs.map((doc) => {
@@ -38,11 +43,23 @@ class App extends React.Component {
   handleIncreaseQuantity = (product) => {
     const { products } = this.state;
     const index = products.indexOf(product);
-    products[index].qty += 1;
-    this.setState({
-      // products:products
-      products,
-    });
+    // products[index].qty += 1;
+    // this.setState({
+    //   // products:products
+    //   products,
+    // });
+
+    const docRef = db.collection("products").doc(products[index].id);
+
+    docRef.update({
+      qty: products[index].qty + 1
+    })
+    .then(()=>{
+      console.log("Updated successfully")
+    })
+    .catch((err)=>{
+      console.log("Error " , err);
+    })
   };
 
   // Decreasing Quantity
@@ -92,8 +109,7 @@ class App extends React.Component {
 
   // Adding Product in FireBase
   addProduct = () => {
-    firestore
-      .collection("porducts")
+    db.collection("products")
       .add({
         img: "",
         price: 99,
@@ -113,7 +129,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar count={this.getCartCount()} />
-        <button onClick={this.addProduct}>Add Product</button>
+        {/* <button onClick={this.addProduct}>Add Product</button> */}
         <Cart
           products={products}
           onIncreaseQuantity={this.handleIncreaseQuantity}

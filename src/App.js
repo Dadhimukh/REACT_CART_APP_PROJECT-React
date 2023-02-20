@@ -3,12 +3,9 @@ import { firestore } from "./firebase";
 import Cart from "./Cart";
 import Navbar from "./NavBar";
 
-
 const db = firestore;
 
-
 // import './App.css';
-
 
 class App extends React.Component {
   constructor() {
@@ -49,17 +46,19 @@ class App extends React.Component {
     //   products,
     // });
 
+    // This will updating the Increase qty in firebase
     const docRef = db.collection("products").doc(products[index].id);
 
-    docRef.update({
-      qty: products[index].qty + 1
-    })
-    .then(()=>{
-      console.log("Updated successfully")
-    })
-    .catch((err)=>{
-      console.log("Error " , err);
-    })
+    docRef
+      .update({
+        qty: products[index].qty + 1,
+      })
+      .then(() => {
+        console.log("Increase Updated successfully");
+      })
+      .catch((err) => {
+        console.log("Error ", err);
+      });
   };
 
   // Decreasing Quantity
@@ -68,23 +67,51 @@ class App extends React.Component {
     const index = products.indexOf(product);
     if (products[index].qty === 0) {
       return;
-    } else {
-      products[index].qty -= 1;
     }
+    // else {
+    //   products[index].qty -= 1;
+    // }
 
-    this.setState({
-      // products:products
-      products,
-    });
+    // this.setState({
+    //   // products:products
+    //   products,
+    // });
+    // This will updating the Decrease qty in firebase
+    const docRef = db.collection("products").doc(products[index].id);
+
+    docRef
+      .update({
+        qty: products[index].qty - 1,
+      })
+      .then(() => {
+        console.log("Decrease Updated successfully");
+      })
+      .catch((err) => {
+        console.log("Error ", err);
+      });
   };
 
   // Deleating Products
   handleDeleteProduct = (id) => {
     const { products } = this.state;
-    const items = products.filter((item) => item.id !== id);
-    this.setState({
-      products: items,
-    });
+    // const items = products.filter((item) => item.id !== id);
+    // this.setState({
+    //   products: items,
+    // });
+
+    // This will update the Deleating products in firebase
+    const docRef = db.collection("products").doc(id);
+
+    docRef
+      .delete()
+      .then(() => {
+        console.log("Deleted Product successfully");
+      })
+      .catch((err) => {
+        console.log("Error ", err);
+      });
+
+
   };
 
   getCartCount = () => {
